@@ -53,4 +53,9 @@ class UserFactory extends Factory
     {
         return $this->state(fn () => ['role' => UserRole::Petugas]);
     }
+
+    public function peminjam(): static
+    {
+        return $this->state(fn () => ['role' => UserRole::Peminjam]);
+    }
 }

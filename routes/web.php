@@ -2,6 +2,7 @@
 <?php
 
 use App\Enums\UserRole;
+use App\Http\Controllers\Admin\ManagedUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ],
         ]);
     })->middleware('role:peminjam')->name('peminjam.dashboard');
+
+    Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+        Route::resource('users', ManagedUserController::class)->except(['show']);
+    });
 });
 
 Route::middleware('auth')->group(function () {
